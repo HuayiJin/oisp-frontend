@@ -69,7 +69,7 @@ describe('alerts service', function(){
     describe('get unread alerts', function(){
         it('should get unread alerts if everything is ok', function(){
             // prepare
-            httpBackend.expectGET(new RegExp('/accounts/'+accountId+'/alerts?.*$')).respond(alerts);
+            httpBackend.expectGET(new RegExp('/accounts/'+accountId+'/alerts?.*status=New.*$')).respond(alerts);
 
             // execute
             service.getUnreadAlerts();
@@ -81,7 +81,7 @@ describe('alerts service', function(){
 
         it('should get 0 unread alerts if something crashes', function(){
             // prepare
-            httpBackend.expectGET(new RegExp('/accounts/'+accountId+'/alerts?.*$')).respond(500);
+            httpBackend.expectGET(new RegExp('/accounts/'+accountId+'/alerts?.*status=New.*$')).respond(500);
 
             // execute
             service.getUnreadAlerts();
