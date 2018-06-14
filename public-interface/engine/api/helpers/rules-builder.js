@@ -74,8 +74,9 @@ var buildConditions = function (user, rule) {
 };
 
 exports.formatRule = function (accountId, user, rule, callback) {
-    rule.conditions = buildConditions(user, rule);
-
+    if(rule.conditions){
+	rule.conditions = buildConditions(user, rule);
+    }
     rule.accountId = accountId;
     rule.naturalLanguage = '';
 
@@ -128,7 +129,7 @@ exports.formatRule = function (accountId, user, rule, callback) {
         }
     };
 
-    if (Array.isArray(rule.conditions.values)) {
+    if (rule.conditions && Array.isArray(rule.conditions.values)) {
         for (var i = 0; i < rule.conditions.values.length; i++) {
             buildNaturalLangMsg(rule.conditions.values[i]);
             if (rule.conditions.operator && i < rule.conditions.values.length - 1) {
